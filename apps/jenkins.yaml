@@ -1,0 +1,205 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  creationTimestamp: "2023-11-25T09:30:33Z"
+  generation: 76
+  name: jenkins
+  namespace: argocd
+  resourceVersion: "1866081"
+  uid: 3a5a54eb-9801-433c-8519-e848a3ff1c52
+spec:
+  destination:
+    namespace: ci-cd
+    server: https://kubernetes.default.svc
+  project: default
+  source:
+    path: Jen
+    repoURL: https://github.com/Mazurovsasha/14.depl.git
+    targetRevision: HEAD
+  syncPolicy:
+    automated:
+      prune: true
+    syncOptions:
+    - CreateNamespace=true
+status:
+  controllerNamespace: argocd
+  health:
+    status: Healthy
+  history:
+  - deployStartedAt: "2023-11-25T09:30:34Z"
+    deployedAt: "2023-11-25T09:30:35Z"
+    id: 0
+    revision: 1cf116eeb8b4adc11ce3e5c70c668240511b5347
+    source:
+      path: Jen
+      repoURL: https://github.com/Mazurovsasha/14.depl.git
+      targetRevision: HEAD
+  - deployStartedAt: "2023-11-25T09:47:38Z"
+    deployedAt: "2023-11-25T09:47:39Z"
+    id: 1
+    revision: 8317bb1bbcfb7e89086ec2d8e9f9f3843761423e
+    source:
+      path: Jen
+      repoURL: https://github.com/Mazurovsasha/14.depl.git
+      targetRevision: HEAD
+  operationState:
+    finishedAt: "2023-11-25T09:47:39Z"
+    message: successfully synced (all tasks run)
+    operation:
+      initiatedBy:
+        automated: true
+      retry:
+        limit: 5
+      sync:
+        prune: true
+        revision: 8317bb1bbcfb7e89086ec2d8e9f9f3843761423e
+        syncOptions:
+        - CreateNamespace=true
+    phase: Succeeded
+    startedAt: "2023-11-25T09:47:38Z"
+    syncResult:
+      resources:
+      - group: ""
+        hookPhase: Running
+        kind: Namespace
+        message: namespace/ci-cd unchanged
+        name: ci-cd
+        namespace: ci-cd
+        status: Synced
+        syncPhase: Sync
+        version: v1
+      - group: ""
+        hookPhase: Running
+        kind: Secret
+        message: secret/jenkins-secret unchanged
+        name: jenkins-secret
+        namespace: ci-cd
+        status: Synced
+        syncPhase: Sync
+        version: v1
+      - group: ""
+        hookPhase: Running
+        kind: ConfigMap
+        message: configmap/basic-security unchanged
+        name: basic-security
+        namespace: ci-cd
+        status: Synced
+        syncPhase: Sync
+        version: v1
+      - group: ""
+        hookPhase: Running
+        kind: ConfigMap
+        message: configmap/jenkins-config unchanged
+        name: jenkins-config
+        namespace: ci-cd
+        status: Synced
+        syncPhase: Sync
+        version: v1
+      - group: rbac.authorization.k8s.io
+        hookPhase: Running
+        kind: ClusterRoleBinding
+        message: clusterrolebinding.rbac.authorization.k8s.io/jenkins reconciled.
+          clusterrolebinding.rbac.authorization.k8s.io/jenkins unchanged
+        name: jenkins
+        namespace: ci-cd
+        status: Synced
+        syncPhase: Sync
+        version: v1
+      - group: ""
+        hookPhase: Running
+        kind: Service
+        message: service/jenkins unchanged
+        name: jenkins
+        namespace: ci-cd
+        status: Synced
+        syncPhase: Sync
+        version: v1
+      - group: apps
+        hookPhase: Running
+        kind: Deployment
+        message: deployment.apps/jenkins configured
+        name: jenkins
+        namespace: ci-cd
+        status: Synced
+        syncPhase: Sync
+        version: v1
+      - group: networking.k8s.io
+        hookPhase: Running
+        kind: Ingress
+        message: ingress.networking.k8s.io/ingress-jenkins unchanged
+        name: ingress-jenkins
+        namespace: ci-cd
+        status: Synced
+        syncPhase: Sync
+        version: v1
+      revision: 8317bb1bbcfb7e89086ec2d8e9f9f3843761423e
+      source:
+        path: Jen
+        repoURL: https://github.com/Mazurovsasha/14.depl.git
+        targetRevision: HEAD
+  reconciledAt: "2023-11-25T12:02:37Z"
+  resources:
+  - kind: ConfigMap
+    name: basic-security
+    namespace: ci-cd
+    status: Synced
+    version: v1
+  - kind: ConfigMap
+    name: jenkins-config
+    namespace: ci-cd
+    status: Synced
+    version: v1
+  - kind: Namespace
+    name: ci-cd
+    status: Synced
+    version: v1
+  - kind: Secret
+    name: jenkins-secret
+    namespace: ci-cd
+    status: Synced
+    version: v1
+  - health:
+      status: Healthy
+    kind: Service
+    name: jenkins
+    namespace: ci-cd
+    status: Synced
+    version: v1
+  - group: apps
+    health:
+      status: Healthy
+    kind: Deployment
+    name: jenkins
+    namespace: ci-cd
+    status: Synced
+    version: v1
+  - group: networking.k8s.io
+    health:
+      status: Healthy
+    kind: Ingress
+    name: ingress-jenkins
+    namespace: ci-cd
+    status: Synced
+    version: v1
+  - group: rbac.authorization.k8s.io
+    kind: ClusterRoleBinding
+    name: jenkins
+    status: Synced
+    version: v1
+  sourceType: Directory
+  summary:
+    externalURLs:
+    - http://jenkins.k8s-7.sa/
+    images:
+    - jfrog.it-academy.by/public/jenkins-ci:amazurov_01
+  sync:
+    comparedTo:
+      destination:
+        namespace: ci-cd
+        server: https://kubernetes.default.svc
+      source:
+        path: Jen
+        repoURL: https://github.com/Mazurovsasha/14.depl.git
+        targetRevision: HEAD
+    revision: 8317bb1bbcfb7e89086ec2d8e9f9f3843761423e
+    status: Synced
