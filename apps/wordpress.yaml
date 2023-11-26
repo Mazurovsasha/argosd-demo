@@ -1,0 +1,87 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  creationTimestamp: "2023-11-26T07:36:14Z"
+  generation: 11
+  name: wordpress
+  namespace: argocd
+  resourceVersion: "1933149"
+  uid: 6de091b1-1d8b-464c-ae65-00ccf6b02ac3
+spec:
+  destination:
+    namespace: argocd
+    server: https://kubernetes.default.svc
+  project: default
+  source:
+    path: ./wp
+    repoURL: https://github.com/Mazurovsasha/argosd-demo.git
+    targetRevision: master
+  syncPolicy:
+    automated:
+      prune: true
+status:
+  controllerNamespace: argocd
+  health:
+    status: Healthy
+  history:
+  - deployStartedAt: "2023-11-26T07:36:15Z"
+    deployedAt: "2023-11-26T07:36:15Z"
+    id: 0
+    revision: 9fb49a1b96ee055066f919e6dc2b7b28505988d0
+    source:
+      path: ./wp
+      repoURL: https://github.com/Mazurovsasha/argosd-demo.git
+      targetRevision: master
+  operationState:
+    finishedAt: "2023-11-26T07:36:15Z"
+    message: successfully synced (all tasks run)
+    operation:
+      initiatedBy:
+        automated: true
+      retry:
+        limit: 5
+      sync:
+        prune: true
+        revision: 9fb49a1b96ee055066f919e6dc2b7b28505988d0
+    phase: Succeeded
+    startedAt: "2023-11-26T07:36:15Z"
+    syncResult:
+      resources:
+      - group: ""
+        hookPhase: Running
+        kind: Pod
+        message: pod/sa-wordpress-54886b8cb-mxskk created
+        name: sa-wordpress-54886b8cb-mxskk
+        namespace: default
+        status: Synced
+        syncPhase: Sync
+        version: v1
+      revision: 9fb49a1b96ee055066f919e6dc2b7b28505988d0
+      source:
+        path: ./wp
+        repoURL: https://github.com/Mazurovsasha/argosd-demo.git
+        targetRevision: master
+  reconciledAt: "2023-11-26T07:44:38Z"
+  resources:
+  - health:
+      status: Healthy
+    kind: Pod
+    name: sa-wordpress-54886b8cb-mxskk
+    namespace: default
+    status: OutOfSync
+    version: v1
+  sourceType: Directory
+  summary:
+    images:
+    - docker.io/bitnami/wordpress:6.4.1-debian-11-r4
+  sync:
+    comparedTo:
+      destination:
+        namespace: argocd
+        server: https://kubernetes.default.svc
+      source:
+        path: ./wp
+        repoURL: https://github.com/Mazurovsasha/argosd-demo.git
+        targetRevision: master
+    revision: 9fb49a1b96ee055066f919e6dc2b7b28505988d0
+    status: OutOfSync
